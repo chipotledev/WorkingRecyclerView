@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <!-- Caller context -->
+        <variable name="presenter" type="com.kiwiik.business.workingrecyclerview.WorkingRecyclerView"/>
+        <variable name="errorTitle" type="String"/>
+        <variable name="errorMessage" type="String"/>
+        <variable name="errorResource" type="Integer"/>
+        <variable name="state" type="Integer"/>
+        <variable name="currentId" type="Integer"/>
+    </data>
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Progress view -->
+        <FrameLayout
+            android:id="@+id/layout_working_progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:visibility="gone"
+            app:gone="@{ state != 1 }">
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"/>
+
+        </FrameLayout>
+
+        <!-- Empty view -->
+        <LinearLayout
+            android:id="@+id/layout_working_empty"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            tools:visibility="visible"
+            app:gone="@{ state == 4 }">
+
+            <TextView
+                android:id="@+id/txt_working_recycler_title"
+                android:text="@{ errorTitle }"
+                android:layout_marginTop="@dimen/horizontal_separation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="48sp"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/mgv_state_image"
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:scaleType="fitCenter"
+                android:contentDescription="@null"
+                app:imageResource="@{ errorResource }" />
+
+
+            <TextView
+                android:id="@+id/txt_working_recycler_message"
+                android:text="@{ errorMessage }"
+                android:layout_marginTop="@dimen/horizontal_separation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="12sp"
+                android:paddingLeft="@dimen/activity_horizontal_margin"
+                android:paddingStart="@dimen/activity_horizontal_margin"
+                android:paddingRight="@dimen/activity_horizontal_margin"
+                android:paddingEnd="@dimen/activity_horizontal_margin"
+                android:layout_gravity="center"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_retry"
+                android:layout_marginTop="@dimen/horizontal_separation"
+                android:text="@string/retry"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="14dp"
+                android:elevation="10dp"
+                android:background="#FFF"
+                android:textColor="#4184f3"
+                android:onClick="@{ ()-> presenter.actionClicked( currentId )}"/>
+
+        </LinearLayout>
+
+        <!-- Recycler view in charge of the display of the customerList -->
+        <androidx.recyclerview.widget.RecyclerView
+            app:gone="@{ state != 4 }"
+            android:id="@+id/working_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:nestedScrollingEnabled="false"/>
+
+    </FrameLayout>
+</layout>
