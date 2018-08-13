@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.dokka-android'
 
 android {
     compileSdkVersion 28
@@ -29,6 +30,22 @@ android {
         }
     }
 
+    dokka {
+        moduleName = 'workingrecyclerview'
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/javadoc"
+
+        jdkVersion = 8 // Used for linking to JDK
+
+        // Do not output deprecated members
+        skipDeprecated = true
+
+        // Emit warnings about not documented members.
+        reportUndocumented = true
+
+        skipEmptyPackages = true
+    }
+
 }
 
 dependencies {
@@ -46,3 +63,7 @@ dependencies {
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+
+kapt {
+    generateStubs = true
+}
