@@ -7,7 +7,12 @@ import android.widget.ImageView
 import androidx.databinding.adapters.ImageViewBindingAdapter.setImageDrawable
 import androidx.databinding.BindingAdapter
 
-
+/** Utils to show or shoe elements on XML View
+ * @author Savir Guev
+ * @author https://github.com/chipotledev
+ * @version 1.0
+ * @since 1.0
+ */
 class AttributeUtils {
 
     companion object {

@@ -6,24 +6,48 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 
-
-
+/** Controls the infinite scroll on the Recycler View
+ * @author Ardok
+ * @author https://github.com/ardok
+ * @version 2.0
+ * @since 1.0
+ */
 abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
-    // The minimum amount of items to have below your current scroll position
-    // before loading more.
+    
+    /**
+     * The minimum amount of items to have below your current scroll position before loading more.
+     */
     private var visibleThreshold = 5
-    // The current offset index of data you have loaded
+    
+    /**
+     * The current offset index of data you have loaded
+     */
     private var currentPage = 0
-    // The total number of items in the dataset after the last load
+    
+    /**
+     * The total number of items in the dataset after the last load
+     */
     private var previousTotalItemCount = 0
-    // True if we are still waiting for the last set of data to load.
+    
+    /**
+     * True if we are still waiting for the last set of data to load.
+     */
     private var loading = true
-    // Sets the starting page index
+    /**
+     * Sets the starting page index
+     */
+    
     private val startingPageIndex = 0
-    //Sets the items per page
+    
+    /**
+     * Sets the items per page
+     */
     private var itemsPerPage = 0
-
-    lateinit var mLayoutManager: RecyclerView.LayoutManager
+    
+    /**
+     * Latout manager of the current recycler view
+     */
+    private var mLayoutManager: RecyclerView.LayoutManager
 
 
 
@@ -43,7 +67,11 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
         visibleThreshold *= layoutManager.spanCount
         this.itemsPerPage = itemsPerPage
     }
-
+    
+    /**
+     * Returns the item at bottom of RecyclerView
+     * @param lastVisibleItemPositions : The set of visible items
+     */
     private fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
         var maxSize = 0
         for (i in lastVisibleItemPositions.indices) {
@@ -55,7 +83,10 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
         }
         return maxSize
     }
-
+    
+    /**
+     * Listen for scroll action
+     */
     override fun onScrolled(view: RecyclerView, dx: Int, dy: Int) {
         var lastVisibleItemPosition = 0
         val totalItemCount = mLayoutManager.itemCount
@@ -103,11 +134,15 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
             loading = true
         }
     }
-
-    // Defines the process for actually loading more data based on page
+    
+    /**
+     * Defines the process for actually loading more data based on page
+     */
     abstract fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView)
-
-    // Call this method whenever performing new searches
+    
+    /**
+     * Call this method whenever performing new searches
+     */
     fun resetState() {
         this.currentPage = startingPageIndex
         this.previousTotalItemCount = 0
