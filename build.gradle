@@ -1,4 +1,8 @@
 apply plugin: 'com.android.library'
+<<<<<<< HEAD
+=======
+apply plugin: 'org.jetbrains.dokka-android'
+>>>>>>> 79f28c2021538319016bffcb3b5342b7db8802ba
 
 android {
     compileSdkVersion 28
@@ -29,6 +33,25 @@ android {
         }
     }
 
+<<<<<<< HEAD
+=======
+    dokka {
+        moduleName = 'workingrecyclerview'
+        outputFormat = 'html'
+        outputDirectory = "$buildDir/javadoc"
+
+        jdkVersion = 8 // Used for linking to JDK
+
+        // Do not output deprecated members
+        skipDeprecated = true
+
+        // Emit warnings about not documented members.
+        reportUndocumented = true
+
+        skipEmptyPackages = true
+    }
+
+>>>>>>> 79f28c2021538319016bffcb3b5342b7db8802ba
 }
 
 dependencies {
@@ -40,9 +63,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+<<<<<<< HEAD
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+=======
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+>>>>>>> 79f28c2021538319016bffcb3b5342b7db8802ba
 }
 
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+<<<<<<< HEAD
+=======
+
+kapt {
+    generateStubs = true
+}
+>>>>>>> 79f28c2021538319016bffcb3b5342b7db8802ba

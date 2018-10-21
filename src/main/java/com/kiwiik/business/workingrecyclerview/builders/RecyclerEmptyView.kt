@@ -2,16 +2,41 @@ package com.kiwiik.business.workingrecyclerview.builders
 
 import com.kiwiik.business.workingrecyclerview.WorkingRecyclerView
 
+/** Represents the data structure for an Empty View
+ * @author Savir Guev
+ * @author https://github.com/chipotledev
+ * @version 1.0
+ * @since 1.0
+ */
 data class RecyclerEmptyView(
+        
+        /**
+         * Title for Empty View
+         */
         val title: String?,
+
+        /**
+         * Message for Empty View
+         */
         val message: String?,
+
+        /**
+         * Image Resource for Empty View
+         */
         val resource: Int,
+
+        /**
+         * Text for the button on Empty View
+         */
         val actionText : String?,
+
+        /**
+         * Callback to communicate the button actions on Parent View
+         */
         val callback : WorkingRecyclerView.EmptyButtonCallback?
 ){
 
     class Builder {
-
         var title: String? = null
             private set
 

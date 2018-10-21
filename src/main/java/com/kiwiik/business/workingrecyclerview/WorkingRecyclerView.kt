@@ -244,7 +244,6 @@ class WorkingRecyclerView : FrameLayout {
     }
 
     fun actionClicked(id: Int){
-
         if(id == -1){
             return
         }
